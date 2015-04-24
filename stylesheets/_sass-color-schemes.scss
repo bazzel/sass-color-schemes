@@ -22,8 +22,43 @@ $color-complement-2: null;
 $color-complement-3: null;
 $color-complement-4: null;
 
-@mixin init-color-scheme(
+$base-color: green !default;
+$variation: 'full colors' !default;
+$model: 'mono' !default;
 
+
+@mixin init-color-scheme(
+  $base-color: $base-color,
+  $variation: $variation,
+  $model: $model
 ) {
-  $color-primary-0: yellow !global;
+  $scheme: map-get($variations, $variation);
+  $compl-color: complement($base-color);
+
+  $color-primary-0: adjust-base-color($base-color, $scheme, 3) !global;
+  $color-primary-1: adjust-base-color($base-color, $scheme, 5) !global;
+  $color-primary-2: adjust-base-color($base-color, $scheme, 4) !global;
+  $color-primary-3: adjust-base-color($base-color, $scheme, 2) !global;
+  $color-primary-4: adjust-base-color($base-color, $scheme, 1) !global;
+
+  @if ($model == 'complement') {
+    $color-complement-0: adjust-base-color($compl-color, $scheme, 3) !global;
+    $color-complement-1: adjust-base-color($compl-color, $scheme, 5) !global;
+    $color-complement-2: adjust-base-color($compl-color, $scheme, 4) !global;
+    $color-complement-3: adjust-base-color($compl-color, $scheme, 2) !global;
+    $color-complement-4: adjust-base-color($compl-color, $scheme, 1) !global;
+  }
+}
+
+$variations: (
+  'full colors': (0 -39) (0 -22) (0 0) (0 22) (0 39),
+  'lightest pale pastel': (0 60) (0 68) (0 77) (0 82) (0 90)
+);
+
+@function adjust-base-color($base-color, $scheme, $n) {
+  $sval: percentage(nth(nth($scheme, $n), 1))/100;
+  $lval: percentage(nth(nth($scheme, $n), 2))/100;
+  $color: scale-color($base-color, $saturation: $sval, $lightness: $lval);
+
+  @return $color;
 }
