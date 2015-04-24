@@ -1,0 +1,29 @@
+$color-primary-0: null;
+$color-primary-1: null;
+$color-primary-2: null;
+$color-primary-3: null;
+$color-primary-4: null;
+
+$color-secondary-1-0: null;
+$color-secondary-1-1: null;
+$color-secondary-1-2: null;
+$color-secondary-1-3: null;
+$color-secondary-1-4: null;
+
+$color-secondary-2-0: null;
+$color-secondary-2-1: null;
+$color-secondary-2-2: null;
+$color-secondary-2-3: null;
+$color-secondary-2-4: null;
+
+$color-complement-0: null;
+$color-complement-1: null;
+$color-complement-2: null;
+$color-complement-3: null;
+$color-complement-4: null;
+
+@mixin init-color-scheme(
+
+) {
+  $color-primary-0: yellow !global;
+}
