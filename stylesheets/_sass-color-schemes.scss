@@ -1,9 +1,3 @@
-$color-primary-0: null;
-$color-primary-1: null;
-$color-primary-2: null;
-$color-primary-3: null;
-$color-primary-4: null;
-
 $color-secondary-1-0: null;
 $color-secondary-1-1: null;
 $color-secondary-1-2: null;
@@ -16,46 +10,35 @@ $color-secondary-2-2: null;
 $color-secondary-2-3: null;
 $color-secondary-2-4: null;
 
-$color-complement-0: null;
-$color-complement-1: null;
-$color-complement-2: null;
-$color-complement-3: null;
-$color-complement-4: null;
-
 $base-color: green !default;
 $variation: 'full colors' !default;
 $model: 'mono' !default;
 
-
-@mixin init-color-scheme(
-  $base-color: $base-color,
-  $variation: $variation,
-  $model: $model
-) {
-  $scheme: map-get($variations, $variation);
-  $compl-color: complement($base-color);
-
-  $color-primary-0: adjust-base-color($base-color, $scheme, 3) !global;
-  $color-primary-1: adjust-base-color($base-color, $scheme, 5) !global;
-  $color-primary-2: adjust-base-color($base-color, $scheme, 4) !global;
-  $color-primary-3: adjust-base-color($base-color, $scheme, 2) !global;
-  $color-primary-4: adjust-base-color($base-color, $scheme, 1) !global;
-
-  @if ($model == 'complement') {
-    $color-complement-0: adjust-base-color($compl-color, $scheme, 3) !global;
-    $color-complement-1: adjust-base-color($compl-color, $scheme, 5) !global;
-    $color-complement-2: adjust-base-color($compl-color, $scheme, 4) !global;
-    $color-complement-3: adjust-base-color($compl-color, $scheme, 2) !global;
-    $color-complement-4: adjust-base-color($compl-color, $scheme, 1) !global;
-  }
-}
-
 $variations: (
-  'full colors': (0 -39) (0 -22) (0 0) (0 22) (0 39),
+  'full colors': (0 0) (0 39) (0 22) (0 -22) (0 -39),
   'lightest pale pastel': (0 60) (0 68) (0 77) (0 82) (0 90)
 );
 
-@function adjust-base-color($base-color, $scheme, $n) {
+@function primary-colors() {
+  @return _compose-shades($base-color);
+}
+
+@function complement-colors() {
+  $compl-color: complement($base-color);
+  @return _compose-shades($compl-color);
+}
+
+@function _compose-shades($color) {
+  $scheme: map-get($variations, $variation);
+
+  $colors: ();
+  @for $i from 1 through 5 {
+    $colors: append($colors, _adjust-color($color, $scheme, $i));
+  }
+  @return $colors;
+}
+
+@function _adjust-color($base-color, $scheme, $n) {
   $sval: percentage(nth(nth($scheme, $n), 1))/100;
   $lval: percentage(nth(nth($scheme, $n), 2))/100;
   $color: scale-color($base-color, $saturation: $sval, $lightness: $lval);
