@@ -1,3 +1,5 @@
+@import "color-schemer";
+
 $color-secondary-1-0: null;
 $color-secondary-1-1: null;
 $color-secondary-1-2: null;
@@ -10,9 +12,11 @@ $color-secondary-2-2: null;
 $color-secondary-2-3: null;
 $color-secondary-2-4: null;
 
-$base-color: green !default;
+$base-color: red !default;
 $variation: 'full colors' !default;
-$model: 'mono' !default;
+$scheme: 'mono' !default;
+$mode: 'ryb' !default; // rgb
+$angle: 45deg;
 
 $variations: (
   'full colors': (0 0) (0 39) (0 22) (0 -22) (0 -39),
@@ -24,24 +28,53 @@ $variations: (
 }
 
 @function complement-colors() {
-  $compl-color: complement($base-color);
+  $compl-color: if($mode == 'ryb', ryb-complement($base-color), complement($base-color));
   @return _compose-shades($compl-color);
 }
 
+@function secondary-1-colors() {
+  $angle: 180 - $angle;
+  @if ($scheme == 'triad') {
+    $sec1-color: if($mode == 'ryb', ryb-adjust-hue($base-color, $angle), adjust-hue($base-color, $angle));
+    @return _compose-shades($sec1-color);
+  } @else {
+    @return _empty-array();
+  }
+}
+
+@function secondary-2-colors() {
+  $angle: 180 + $angle;
+
+  @if ($scheme == 'triad') {
+    $sec1-color: if($mode == 'ryb', ryb-adjust-hue($base-color, $angle), adjust-hue($base-color, $angle));
+    @return _compose-shades($sec1-color);
+  } @else {
+    @return _empty-array();
+  }
+}
+
 @function _compose-shades($color) {
-  $scheme: map-get($variations, $variation);
+  $shades: map-get($variations, $variation);
 
   $colors: ();
   @for $i from 1 through 5 {
-    $colors: append($colors, _adjust-color($color, $scheme, $i));
+    $colors: append($colors, _adjust-color($color, $shades, $i));
   }
   @return $colors;
 }
 
-@function _adjust-color($base-color, $scheme, $n) {
-  $sval: percentage(nth(nth($scheme, $n), 1))/100;
-  $lval: percentage(nth(nth($scheme, $n), 2))/100;
+@function _adjust-color($base-color, $shades, $n) {
+  $sval: percentage(nth(nth($shades, $n), 1))/100;
+  $lval: percentage(nth(nth($shades, $n), 2))/100;
   $color: scale-color($base-color, $saturation: $sval, $lightness: $lval);
 
   @return $color;
+}
+
+@function _empty-array() {
+  $arr: ();
+  @for $i from 1 through 5 {
+    $arr: append($arr, null);
+  }
+  @return $arr;
 }
