@@ -1,0 +1,66 @@
+@function primary-colors() {
+  @return _compose-shades($base-color);
+}
+
+@function complement-colors() {
+  @if ($complement == false) and ($scheme != 'tetrad') {
+    @return _empty-array();
+  }
+
+  @return _compose-color(180);
+}
+
+@function secondary-1-colors() {
+  @if ($scheme == 'triad') {
+    @return _compose-color(180 - $angle);
+  } @else if ($scheme == 'adjacent') or ($scheme == 'tetrad') {
+    @return _compose-color($angle);
+  } @else {
+    @return _empty-array();
+  }
+}
+
+@function secondary-2-colors() {
+  @if ($scheme == 'triad') or ($scheme == 'tetrad') {
+    @return _compose-color(180 + $angle);
+  } @else if ($scheme == 'adjacent') {
+    @return _compose-color(-$angle);
+  } @else {
+    @return _empty-array();
+  }
+}
+
+@function _compose-color($angle) {
+    $color: _adjust-hue($angle);
+    @return _compose-shades($color);
+}
+
+@function _adjust-hue($angle) {
+  @return if($mode == 'ryb', ryb-adjust-hue($base-color, $angle), adjust-hue($base-color, $angle));
+}
+
+@function _compose-shades($color) {
+  $shades: map-get($variations, $variation);
+
+  $colors: ();
+  @for $i from 1 through 5 {
+    $colors: append($colors, _adjust-color($color, $shades, $i));
+  }
+  @return $colors;
+}
+
+@function _adjust-color($base-color, $shades, $n) {
+  $sval: percentage(nth(nth($shades, $n), 1))/100;
+  $lval: percentage(nth(nth($shades, $n), 2))/100;
+  $color: scale-color($base-color, $saturation: $sval, $lightness: $lval);
+
+  @return $color;
+}
+
+@function _empty-array() {
+  $arr: ();
+  @for $i from 1 through 5 {
+    $arr: append($arr, null);
+  }
+  @return $arr;
+}
