@@ -23,13 +23,13 @@ Or install it yourself as:
 Import it into your main stylesheet:
 
     @import 'sass-color-schemes';
-    
+
 ### Color functions
 
 Sass-color-schemes has 4 functions that all return an array of 5 color values (of 5 `null`'s). Each function uses variables, such as `$base-color`, `$variation`, etc. for calculating the proper values.
 
 See **variables** for a description of the different kinds.
-    
+
 #### primary-colors
 
 Returns an array of 5 colors, in which the first element is the base color and the rest are different shades of the base color. You need the Sass' `nth` function to access a specific color:
@@ -47,7 +47,7 @@ $color-primary-1: nth(primary-colors(), 2);
   color: $color-primary-1;
 }
 
-``` 
+```
 
 #### complement-colors
 
@@ -83,24 +83,43 @@ $color-secondary-2-1: nth(secondary-2-colors(), 2);
 ```
 **Note:** The `secondary-1-colors` and `secondary-2-colors` functions only returns an array of colors when the `$scheme` variable is set to `adjacent`, `tetrad` or `triad`. Otherwise an array with 5 `null`'s is returned.
 
-### Variables
+### `$sass-color-schemes` variable
 
-You can (and might want to) define several variables to customize the color scheme.
+You can (and might want to) configure sass-color-schemes to customize the color scheme. For this you need to define the `$sass-color-schemes` map variable, which contain one or more keys.
 
-#### $base-color
+```
+$sass-color-schemes: (
+  base-color: red,
+  scheme: 'monochromatic',
+  // ... etc.
+);
+
+```
+
+#### `base-color` key
 
 The color used as a base color to calculate the shades and all other colors. This can be any Sass color.
 
 Defaults to `#ff0000` (red).
 
 ```
-$base-color: red;
-$base-color: hsl(0deg, 100%, 50%);
-$base-color: #ff0000;
-// ... etc.
+$sass-color-schemes: (
+  base-color: red,
+  // ... etc.
+);
+
+$sass-color-schemes: (
+  base-color: hsl(0deg, 100%, 50%),
+  // ... etc.
+);
+
+$sass-color-schemes: (
+  base-color: #ff0000,
+  // ... etc.
+);
 ```
 
-#### $scheme
+#### `scheme` key
 
 Sass-color-schemes supports 4 different color schemes:
 
@@ -112,37 +131,55 @@ Sass-color-schemes supports 4 different color schemes:
 Defaults to `'monochromatic'`.
 
 ```
-$scheme: 'monochromatic';
-$scheme: 'tetrad';
-// ... etc.
+$sass-color-schemes: (
+  scheme: 'monochromatic',
+  // ... etc.
+);
 
+$sass-color-schemes: (
+  scheme: 'tetrad',
+  // ... etc.
+);
 ```
 
-#### $complement
+#### `complement` key
 
 If set to `true`, the `complement-colors` function returns shades of the complementary color of the `$base-color`.
 
-Defaults to `false`.
+Defaults to `true`.
 
 ```
-$complement: true;
-$complement: false;
+$sass-color-schemes: (
+  complement: false,
+  // ... etc.
+);
 
 ```
 
-#### $angle
+#### `angle` key
 
 The angle applied to the `$base-color` to calculate other colors in all schemes, expect `monochromatic`. This can be any value and can be set in degrees (deg) or radian (rad) units as well.
 
 Defaults to `30deg`.
 
 ```
-$angle: 30;
-$angle: 30deg;
-$angle: 0.5236rad;
+$sass-color-schemes: (
+  angle: 30,
+  // ... etc.
+);
+
+$sass-color-schemes: (
+  angle: 30deg,
+  // ... etc.
+);
+
+$sass-color-schemes: (
+  angle: 0.5236rad,
+  // ... etc.
+);
 ```
 
-#### $variation
+#### `variation` key
 
 This will vary the tints, tones and shades of the colors returned by all functions. Currently Sass-color-schemes supports 24 variations:
 
@@ -171,12 +208,18 @@ This will vary the tints, tones and shades of the colors returned by all functio
 * greyish medium dark
 * greyish lightest
 
-Defaults to `full colors`.
+Defaults to `default`.
 
 ```
-$variation: 'darker pale pastel';
-$variation: 'shiny';
-// ... etc.
+$sass-color-schemes: (
+  variation: 'darker pale pastel',
+  // ... etc.
+);
+
+$sass-color-schemes: (
+  variation: 'shiny',
+  // ... etc.
+);
 
 ```
 
@@ -192,19 +235,23 @@ These modes are internally used when calculating colors. RYB is primarily used i
 Defaults to `ryb`.
 
 ```
-$mode: 'rgb';
-$mode: 'ryb';
+$sass-color-schemes: (
+  mode: 'rgb',
+  // ... etc.
+);
 
 ```
 
 ### Full example
 
 ```
-$base-color:          #6893A6;
-$variation:           'shiny';
-$scheme:              'adjacent';
-$angle:               25;
-$complement:          true;
+$sass-color-schemes: (
+  base-color:         #6893A6,
+  variation:          'shiny',
+  scheme:             'adjacent',
+  angle:              25,
+  complement:         true
+);
 
 $color-primary-0:     nth(primary-colors(), 1);
 $color-primary-1:     nth(primary-colors(), 2);

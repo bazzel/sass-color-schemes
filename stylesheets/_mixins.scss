@@ -1,9 +1,9 @@
 @function primary-colors() {
-  @return _compose-shades($base-color);
+  @return _compose-shades(_base-color());
 }
 
 @function complement-colors() {
-  @if ($complement == false) and ($scheme != 'tetrad') {
+  @if (_complement() == false) and (_scheme() != 'tetrad') {
     @return _empty-array();
   }
 
@@ -11,20 +11,20 @@
 }
 
 @function secondary-1-colors() {
-  @if ($scheme == 'triad') {
-    @return _compose-color(180 - $angle);
-  } @else if ($scheme == 'adjacent') or ($scheme == 'tetrad') {
-    @return _compose-color($angle);
+  @if (_scheme() == 'triad') {
+    @return _compose-color(180 - _angle());
+  } @else if (_scheme() == 'adjacent') or (_scheme() == 'tetrad') {
+    @return _compose-color(_angle());
   } @else {
     @return _empty-array();
   }
 }
 
 @function secondary-2-colors() {
-  @if ($scheme == 'triad') or ($scheme == 'tetrad') {
-    @return _compose-color(180 + $angle);
-  } @else if ($scheme == 'adjacent') {
-    @return _compose-color(-$angle);
+  @if (_scheme() == 'triad') or (_scheme() == 'tetrad') {
+    @return _compose-color(180 + _angle());
+  } @else if (_scheme() == 'adjacent') {
+    @return _compose-color(-_angle());
   } @else {
     @return _empty-array();
   }
@@ -36,11 +36,11 @@
 }
 
 @function _adjust-hue($angle) {
-  @return if($mode == 'ryb', ryb-adjust-hue($base-color, $angle), adjust-hue($base-color, $angle));
+  @return if(_mode() == 'ryb', ryb-adjust-hue(_base-color(), $angle), adjust-hue(_base-color(), $angle));
 }
 
 @function _compose-shades($color) {
-  $shades: map-get($variations, $variation);
+  $shades: map-get($_scs-variations, _variation());
 
   $colors: ();
   @for $i from 1 through 5 {
@@ -63,4 +63,32 @@
     $arr: append($arr, null);
   }
   @return $arr;
+}
+
+@function _base-color() {
+  @return _fetch('base-color', $_scs-base-color);
+}
+
+@function _variation() {
+  @return _fetch('variation', $_scs-variation);
+}
+
+@function _scheme() {
+  @return _fetch('scheme', $_scs-scheme);
+}
+
+@function _mode() {
+  @return _fetch('mode', $_scs-mode);
+}
+
+@function _angle() {
+  @return _fetch('angle', $_scs-angle);
+}
+
+@function _complement() {
+  @return _fetch('complement', $_scs-complement);
+}
+
+@function _fetch($key, $default) {
+  @return if(map-has-key($sass-color-schemes, $key), map-get($sass-color-schemes, $key), $default);
 }

@@ -1,11 +1,13 @@
-$base-color:  #ff0000 !default;
-$variation:   'default' !default;
-$scheme:      'monochromatic' !default;  // monochromatic, adjacent, triad, tetrad
-$mode:        'ryb' !default; // rgb, ryb
-$angle:       30deg !default;
-$complement:  false !default;
+$sass-color-schemes: () !default;
 
-$variations: (
+$_scs-base-color:  green !default;
+$_scs-variation:   'default' !default;
+$_scs-scheme:      'monochromatic' !default;  // monochromatic, adjacent, triad, tetrad
+$_scs-mode:        'ryb' !default; // rgb, ryb
+$_scs-angle:       30deg !default;
+$_scs-complement:  true !default;
+
+$_scs-variations: (
   'default':                 (0 0) (16 68) (9 36) (12 -24) (32 -44),
   'lightest pale pastel':    (0 77) (0 90) (0 82) (0 68) (0 60),
   'very light pale pastel':  (0 65) (0 86) (0 77) (-26 42) (-44 15),
