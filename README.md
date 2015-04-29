@@ -85,7 +85,14 @@ $color-secondary-2-1: nth(secondary-2-colors(), 2);
 
 ### `$sass-color-schemes` variable
 
-You can (and might want to) configure sass-color-schemes to customize the color scheme. For this you need to define the `$sass-color-schemes` map variable, which contain one or more keys.
+You can (and might want to) configure sass-color-schemes to customize the color scheme. For this you need to define the `$sass-color-schemes` map variable, which contains one or more of the following keys:
+
+* [base-color](#base-color-key)
+* scheme
+* complement
+* angle
+* variation
+* mode
 
 ```
 $sass-color-schemes: (
@@ -98,7 +105,7 @@ $sass-color-schemes: (
 
 #### `base-color` key
 
-The color used as a base color to calculate the shades and all other colors. This can be any Sass color.
+The color used as a base color to calculate the shades and all other colors. This can be any [Sass color](http://sass-lang.com/documentation/Sass/Script/Value/Color.html).
 
 Defaults to `#ff0000` (red).
 
@@ -223,7 +230,7 @@ $sass-color-schemes: (
 
 ```
 
-#### $mode
+#### `mode` key
 
 You can choose between:
 
