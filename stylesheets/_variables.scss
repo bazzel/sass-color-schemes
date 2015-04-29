@@ -1,11 +1,12 @@
 $base-color:  #ff0000 !default;
-$variation:   'full colors' !default;
+$variation:   'default' !default;
 $scheme:      'monochromatic' !default;  // monochromatic, adjacent, triad, tetrad
 $mode:        'ryb' !default; // rgb, ryb
 $angle:       30deg !default;
 $complement:  false !default;
 
 $variations: (
+  'default':                 (0 0) (16 68) (9 36) (12 -24) (32 -44),
   'lightest pale pastel':    (0 77) (0 90) (0 82) (0 68) (0 60),
   'very light pale pastel':  (0 65) (0 86) (0 77) (-26 42) (-44 15),
   'lighter pale pastel':     (-36 48) (0 83) (0 75) (-49 22) (-52 -5),
