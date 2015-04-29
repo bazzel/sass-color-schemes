@@ -1,0 +1,27 @@
+@function _base-color() {
+  @return _fetch('base-color', $_scs-base-color);
+}
+
+@function _variation() {
+  @return _fetch('variation', $_scs-variation);
+}
+
+@function _scheme() {
+  @return _fetch('scheme', $_scs-scheme);
+}
+
+@function _mode() {
+  @return _fetch('mode', $_scs-mode);
+}
+
+@function _angle() {
+  @return _fetch('angle', $_scs-angle);
+}
+
+@function _complement() {
+  @return _fetch('complement', $_scs-complement);
+}
+
+@function _fetch($key, $default) {
+  @return if(map-has-key($sass-color-schemes, $key), map-get($sass-color-schemes, $key), $default);
+}

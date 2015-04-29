@@ -1,0 +1,29 @@
+@mixin scs-test($height: 2em, $element: 'body:before') {
+  $colors: primary-colors();
+  $colors: join($colors, compact(complement-colors()));
+  $colors: join($colors, compact(secondary-1-colors()));
+  $colors: join($colors, compact(secondary-2-colors()));
+
+  #{$element} {
+    content: "";
+    display: block;
+    height: $height;
+    @include background(_scs-stripes(left, ($colors)));
+    position: relative;
+    z-index: 999999999999;
+    @include box-shadow(rgba(black, 0.23) 0 3px 10px, rgba(black, 0.16) 0 3px 10px);
+  }
+};
+
+@function _scs-stripes($position, $colors) {
+  $gradient: ();
+  $width: 100% / length($colors);
+
+  @for $i from 1 through length($colors) {
+    $pop: nth($colors,$i);
+    $new: $pop ($width * ($i - 1)), $pop ($width * $i);
+    $gradient: join($gradient, $new, comma);
+  }
+
+  @return linear-gradient($position, $gradient);
+};

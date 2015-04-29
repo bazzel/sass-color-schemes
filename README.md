@@ -249,6 +249,36 @@ $sass-color-schemes: (
 
 ```
 
+### Test your color scheme
+
+The `scs-test` mixin adds a bar to the top of your page displaying all the colors that your color scheme provides:
+
+```
+$sass-color-schemes: (
+  base-color: #2980B9,
+  variation:  'tetrad'
+);
+
+@include scs-test;
+```
+
+![image](img/scss-test.png)
+
+`scs-test` accepts the following arguments:
+
+#### `$height`
+
+The height of the colored bar.
+
+Defaults to `2em`.
+
+#### `$selector`
+
+The selector that will contain the colored bar.
+
+Defaults to `body::after`.
+
+
 ### Full example
 
 ```
