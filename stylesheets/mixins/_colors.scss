@@ -24,7 +24,7 @@
   @if (_scheme() == 'triad') or (_scheme() == 'tetrad') {
     @return _compose-color(180 + _angle());
   } @else if (_scheme() == 'adjacent') {
-    @return _compose-color(-_angle());
+    @return _compose-color(- _angle());
   } @else {
     @return _empty-array();
   }
