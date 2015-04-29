@@ -28,7 +28,7 @@ Import it into your main stylesheet:
 
 Sass-color-schemes has 4 functions that all return an array of 5 color values (of 5 `null`'s). Each function uses variables, such as `$base-color`, `$variation`, etc. for calculating the proper values.
 
-See **variables** for a description of the different kinds.
+See [`$sass-color-schemes` variable](#sass-color-schemes-variable) for a description of the different types.
 
 #### primary-colors
 
@@ -88,11 +88,11 @@ $color-secondary-2-1: nth(secondary-2-colors(), 2);
 You can (and might want to) configure sass-color-schemes to customize the color scheme. For this you need to define the `$sass-color-schemes` map variable, which contains one or more of the following keys:
 
 * [base-color](#base-color-key)
-* scheme
-* complement
-* angle
-* variation
-* mode
+* [scheme](#scheme-key)
+* [complement](#complement-key)
+* [angle](#angle-key)
+* [variation](#variation-key)
+* [mode](#mode-key)
 
 ```
 $sass-color-schemes: (
@@ -237,7 +237,7 @@ You can choose between:
 * [RGB](http://en.wikipedia.org/wiki/RGB_color_model) (a.k.a. the light model)
 * [RYB](http://en.wikipedia.org/wiki/RYB_color_model)
 
-These modes are internally used when calculating colors. RYB is primarily used in art and design education.
+These modes are used internally when calculating colors. RYB is primarily used in art and design education.
 
 Defaults to `ryb`.
 
@@ -256,8 +256,7 @@ $sass-color-schemes: (
   base-color:         #6893A6,
   variation:          'shiny',
   scheme:             'adjacent',
-  angle:              25,
-  complement:         true
+  angle:              25
 );
 
 $color-primary-0:     nth(primary-colors(), 1);
