@@ -30,13 +30,13 @@ Sass-color-schemes has 4 functions that all return an array of 5 color values (o
 
 See [`$sass-color-schemes` variable](#sass-color-schemes-variable) for a description of the different types.
 
-#### primary-colors
+#### scs-primary-colors
 
 Returns an array of 5 colors, in which the first element is the base color and the rest are different shades of the base color. You need the Sass' `nth` function to access a specific color:
 
 ```
-$color-primary-0: nth(primary-colors(), 1);
-$color-primary-1: nth(primary-colors(), 2);
+$color-primary-0: nth(scs-primary-colors(), 1);
+$color-primary-1: nth(scs-primary-colors(), 2);
 // ... etc.
 
 .title {
@@ -49,14 +49,14 @@ $color-primary-1: nth(primary-colors(), 2);
 
 ```
 
-#### complement-colors
+#### scs-complement-colors
 
 Returns an array of 5 colors, in which the first element is the complementary color of base color and the rest are different shades of this complementary color. You need the Sass' `nth` function to access a specific color:
 
 
 ```
-$color-complement-0: nth(complement-colors(), 1);
-$color-complement-1: nth(complement-colors(), 2);
+$color-complement-0: nth(scs-complement-colors(), 1);
+$color-complement-1: nth(scs-complement-colors(), 2);
 // ... etc.
 
 .call-to-action {
@@ -65,23 +65,23 @@ $color-complement-1: nth(complement-colors(), 2);
 
 ```
 
-**Note:** The `complement-colors` function only returns an array of colors when the `$complement` variable is set to `true` or the `$scheme` variable is set to `triad`. Otherwise an array with 5 `null`'s is returned.
+**Note:** The `scs-complement-colors` function only returns an array of colors when the `$complement` variable is set to `true` or the `$scheme` variable is set to `triad`. Otherwise an array with 5 `null`'s is returned.
 
-#### secondary-1-colors and secondary-2-colors
+#### scs-secondary-1-colors and scs-secondary-2-colors
 
 Some color schemes contain 2 additional colors. These functions each returns an array of 5 colors with, again, 5 different shades of a color. You need the Sass' `nth` function to access a specific color:
 
 ```
-$color-secondary-1-0: nth(secondary-1-colors(), 1);
-$color-secondary-1-1: nth(secondary-1-colors(), 2);
+$color-secondary-1-0: nth(scs-secondary-1-colors(), 1);
+$color-secondary-1-1: nth(scs-secondary-1-colors(), 2);
 // ... etc.
 
-$color-secondary-2-0: nth(secondary-2-colors(), 1);
-$color-secondary-2-1: nth(secondary-2-colors(), 2);
+$color-secondary-2-0: nth(scs-secondary-2-colors(), 1);
+$color-secondary-2-1: nth(scs-secondary-2-colors(), 2);
 // ... etc.
 
 ```
-**Note:** The `secondary-1-colors` and `secondary-2-colors` functions only returns an array of colors when the `$scheme` variable is set to `adjacent`, `tetrad` or `triad`. Otherwise an array with 5 `null`'s is returned.
+**Note:** The `scs-secondary-1-colors` and `scs-secondary-2-colors` functions only returns an array of colors when the `$scheme` variable is set to `adjacent`, `tetrad` or `triad`. Otherwise an array with 5 `null`'s is returned.
 
 ### `$sass-color-schemes` variable
 
@@ -151,7 +151,7 @@ $sass-color-schemes: (
 
 #### `complement` key
 
-If set to `true`, the `complement-colors` function returns shades of the complementary color of the `$base-color`.
+If set to `true`, the `scs-complement-colors` function returns shades of the complementary color of the `$base-color`.
 
 Defaults to `true`.
 
@@ -289,29 +289,29 @@ $sass-color-schemes: (
   angle:              25
 );
 
-$color-primary-0:     nth(primary-colors(), 1);
-$color-primary-1:     nth(primary-colors(), 2);
-$color-primary-2:     nth(primary-colors(), 3);
-$color-primary-3:     nth(primary-colors(), 4);
-$color-primary-4:     nth(primary-colors(), 5);
+$color-primary-0:     nth(scs-primary-colors(), 1);
+$color-primary-1:     nth(scs-primary-colors(), 2);
+$color-primary-2:     nth(scs-primary-colors(), 3);
+$color-primary-3:     nth(scs-primary-colors(), 4);
+$color-primary-4:     nth(scs-primary-colors(), 5);
 
-$color-complement-0:  nth(complement-colors(), 1);
-$color-complement-1:  nth(complement-colors(), 2);
-$color-complement-2:  nth(complement-colors(), 3);
-$color-complement-3:  nth(complement-colors(), 4);
-$color-complement-4:  nth(complement-colors(), 5);
+$color-complement-0:  nth(scs-complement-colors(), 1);
+$color-complement-1:  nth(scs-complement-colors(), 2);
+$color-complement-2:  nth(scs-complement-colors(), 3);
+$color-complement-3:  nth(scs-complement-colors(), 4);
+$color-complement-4:  nth(scs-complement-colors(), 5);
 
-$color-secondary-1-0: nth(secondary-1-colors(), 1);
-$color-secondary-1-1: nth(secondary-1-colors(), 2);
-$color-secondary-1-2: nth(secondary-1-colors(), 3);
-$color-secondary-1-3: nth(secondary-1-colors(), 4);
-$color-secondary-1-4: nth(secondary-1-colors(), 5);
+$color-secondary-1-0: nth(scs-secondary-1-colors(), 1);
+$color-secondary-1-1: nth(scs-secondary-1-colors(), 2);
+$color-secondary-1-2: nth(scs-secondary-1-colors(), 3);
+$color-secondary-1-3: nth(scs-secondary-1-colors(), 4);
+$color-secondary-1-4: nth(scs-secondary-1-colors(), 5);
 
-$color-secondary-2-0: nth(secondary-2-colors(), 1);
-$color-secondary-2-1: nth(secondary-2-colors(), 2);
-$color-secondary-2-2: nth(secondary-2-colors(), 3);
-$color-secondary-2-3: nth(secondary-2-colors(), 4);
-$color-secondary-2-4: nth(secondary-2-colors(), 5);
+$color-secondary-2-0: nth(scs-secondary-2-colors(), 1);
+$color-secondary-2-1: nth(scs-secondary-2-colors(), 2);
+$color-secondary-2-2: nth(scs-secondary-2-colors(), 3);
+$color-secondary-2-3: nth(scs-secondary-2-colors(), 4);
+$color-secondary-2-4: nth(scs-secondary-2-colors(), 5);
 
 
 ```

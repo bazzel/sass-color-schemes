@@ -1,8 +1,8 @@
 @mixin scs-test($height: 2em, $element: 'body:before') {
-  $colors: primary-colors();
-  $colors: join($colors, compact(complement-colors()));
-  $colors: join($colors, compact(secondary-1-colors()));
-  $colors: join($colors, compact(secondary-2-colors()));
+  $colors: scs-primary-colors();
+  $colors: join($colors, compact(scs-complement-colors()));
+  $colors: join($colors, compact(scs-secondary-1-colors()));
+  $colors: join($colors, compact(scs-secondary-2-colors()));
 
   #{$element} {
     content: "";

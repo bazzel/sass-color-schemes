@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   # Release Specific Information
-  s.version       = '0.3.1'
+  s.version       = '0.4.0'
   s.licenses      = ['MIT']
-  s.date          = '2014-04-29'
+  s.date          = '2015-05-25'
 
   # Gem Details
   s.name          = 'sass-color-schemes'

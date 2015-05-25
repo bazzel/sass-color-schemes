@@ -1,8 +1,8 @@
-@function primary-colors() {
+@function scs-primary-colors() {
   @return _compose-shades(_base-color());
 }
 
-@function complement-colors() {
+@function scs-complement-colors() {
   @if (_complement() == false) and (_scheme() != 'tetrad') {
     @return _empty-array();
   }
@@ -10,7 +10,7 @@
   @return _compose-color(180);
 }
 
-@function secondary-1-colors() {
+@function scs-secondary-1-colors() {
   @if (_scheme() == 'triad') {
     @return _compose-color(180 - _angle());
   } @else if (_scheme() == 'adjacent') or (_scheme() == 'tetrad') {
@@ -20,7 +20,7 @@
   }
 }
 
-@function secondary-2-colors() {
+@function scs-secondary-2-colors() {
   @if (_scheme() == 'triad') or (_scheme() == 'tetrad') {
     @return _compose-color(180 + _angle());
   } @else if (_scheme() == 'adjacent') {
